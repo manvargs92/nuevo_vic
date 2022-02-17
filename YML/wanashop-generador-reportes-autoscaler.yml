@@ -1,0 +1,35 @@
+#################################################################################
+#Objeto:  (BANCO)
+#Funcionalidad: envio de spei (BANCO)
+#Sistema: Spei (BANCO) 
+#Fecha de Creación: 02/Julio/2019
+#Autor: Eduardo Natanael Castillo Caballero [encastillo@frd.org.mx]
+#Actualizaciones: 
+#Versión: 1.0
+#################################################################################
+
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: wanashop-generador-reportes-autoscaler
+  namespace: general-soporte-de-negocio
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: wanashop-generador-reportes-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 90
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 90

@@ -1,0 +1,734 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Contactos-Banca-Electrónica"
+  },
+  "host": "10.60.63.21:8057",
+  "basePath": "/banco/pyme/banca_electronica",
+  "tags": [
+    {
+      "name": "contactos",
+      "description": "Servicios On Premise de contactos de banca electronica"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/contactos": {
+      "post": {
+        "tags": [
+          "contactos"
+        ],
+        "summary": "Alta de contactos",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "nombre_aplicativo",
+            "type": "string",
+            "default": "Venn",
+            "description": "nombre del aplicativo que consume el servicio",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "identificador_usuario",
+            "type": "string",
+            "default": "UsuarioX",
+            "description": "identificador del usuario que manda a llamar el servicio",
+            "required": true
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/datos"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/201_mensaje"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400_mensaje"
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/404_mensaje"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/500_mensaje"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "contactos"
+        ],
+        "summary": "Edición de contactos de banca electrónica",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "nombre_aplicativo",
+            "type": "string",
+            "default": "Venn",
+            "description": "nombre del aplicativo que consume el servicio",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "identificador_usuario",
+            "type": "string",
+            "default": "UsuarioX",
+            "description": "identificador del usuario que manda a llamar el servicio",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/datos_put"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/contacto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400_mensaje"
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/404_mensaje"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/500_mensaje"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "contactos"
+        ],
+        "summary": "Búsqueda de contactos activos por ID del cliente y origen",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "nombre_aplicativo",
+            "type": "string",
+            "default": "Venn",
+            "description": "nombre del aplicativo que consume el servicio",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "identificador_usuario",
+            "type": "string",
+            "default": "UsuarioX",
+            "description": "identificador del usuario que manda a llamar el servicio",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "cliente_id",
+            "type": "integer",
+            "default": 666,
+            "description": "identificador del cliente",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "origen",
+            "type": "string",
+            "default": "MB",
+            "description": "MB|OB",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/200_mensaje_get_venn"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400_mensaje"
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/404_mensaje"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/500_mensaje"
+            }
+          }
+        }
+      }
+    },
+    "/contactos/{id}": {
+      "delete": {
+        "tags": [
+          "contactos"
+        ],
+        "summary": "Eliminación de contactos por ID",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "nombre_aplicativo",
+            "type": "string",
+            "default": "Venn",
+            "description": "nombre del aplicativo que consume el servicio",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "identificador_usuario",
+            "type": "string",
+            "default": "UsuarioX",
+            "description": "identificador del usuario que manda a llamar el servicio",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "default": 666,
+            "description": "Número de contacto",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/200_mensaje"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400_mensaje"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/500_mensaje"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "datos": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "person_type",
+        "curp",
+        "rfc",
+        "email",
+        "account",
+        "maximum_amount",
+        "token",
+        "ip",
+        "agent",
+        "tipo_contacto",
+        "origen",
+        "name",
+        "institution_code",
+        "account_type",
+        "alias"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "integer",
+          "example": 666,
+          "default": 666,
+          "description": "Identificador de cliente beneficiario"
+        },
+        "person_type": {
+          "type": "string",
+          "example": "F",
+          "default": "F",
+          "description": "Definición de género en términos biológicos del beneficiario, el cual se identifica como “F” para femenino y “M” para masculino"
+        },
+        "curp": {
+          "type": "string",
+          "example": "SABC560626MDFLRN09",
+          "default": "SABC560626MDFLRN09",
+          "description": "CURP de beneficiario"
+        },
+        "rfc": {
+          "type": "string",
+          "example": "XAXE760823XXX",
+          "default": "XAXE760823XXX",
+          "description": "RFC de beneficiario"
+        },
+        "email": {
+          "type": "string",
+          "example": "suca@motudo.com",
+          "default": "suca@motudo.com",
+          "description": "Dirección de correo electrónico de beneficiario"
+        },
+        "account": {
+          "type": "string",
+          "example": "11111",
+          "default": "11111",
+          "description": "Numero de cuneta del beneficiario"
+        },
+        "maximum_amount": {
+          "type": "number",
+          "example": 10000,
+          "default": 10000,
+          "description": "Monto máximo de transferencia al beneficiario"
+        },
+        "token": {
+          "type": "string",
+          "example": "dksdhw872387617hdsbi82g-232-2332231",
+          "default": "dksdhw872387617hdsbi82g-232-2332231",
+          "description": "Por Definir"
+        },
+        "ip": {
+          "type": "string",
+          "example": "10.10.10.10",
+          "default": "10.10.10.10",
+          "description": "Dirección IP del dispositivo desde el cual se está realizando la transacción"
+        },
+        "agent": {
+          "type": "string",
+          "example": "root",
+          "default": "root",
+          "description": "Por Definir"
+        },
+        "tipo_contacto": {
+          "type": "string",
+          "example": "temporal",
+          "default": "temporal",
+          "description": "Tipo de contacto beneficiario"
+        },
+        "origen": {
+          "type": "string",
+          "example": "MB",
+          "default": "MB",
+          "description": "Origen de la transacción “MB” para mismo banco y “OB” para otro banco"
+        },
+        "name": {
+          "type": "string",
+          "example": "Juan pablo Garcia perez",
+          "default": "Juan pablo Garcia perez",
+          "description": "Nombre de la persona beneficiaria"
+        },
+        "institution_code": {
+          "type": "string",
+          "example": "009873",
+          "default": "009873",
+          "description": "Código de la institución beneficiaria"
+        },
+        "account_type": {
+          "type": "string",
+          "example": "10",
+          "default": "10",
+          "description": "Tipo de la cuenta beneficiaria"
+        },
+        "alias": {
+          "type": "string",
+          "example": "Eli",
+          "description": "alias del beneficiario"
+        }
+      }
+    },
+    "datos_put": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "person_type",
+        "curp",
+        "rfc",
+        "email",
+        "account",
+        "maximum_amount",
+        "token",
+        "ip",
+        "agent",
+        "tipo_contacto",
+        "origen",
+        "name",
+        "institution_code",
+        "account_type",
+        "alias"
+      ],
+      "properties": {
+        "contact_id": {
+          "type": "integer",
+          "example": 60,
+          "default": 60,
+          "description": "Identificador del contacto"
+        },
+        "client_id": {
+          "type": "integer",
+          "example": 666,
+          "default": 666,
+          "description": "Identificador de cliente beneficiario"
+        },
+        "person_type": {
+          "type": "string",
+          "example": "M",
+          "default": "M",
+          "description": "Definición de género en términos biológicos del beneficiario, el cual se identifica como “F” para femenino y “M” para masculino"
+        },
+        "curp": {
+          "type": "string",
+          "example": "SABC560626MDFLRN09",
+          "default": "SABC560626MDFLRN09",
+          "description": "CURP de beneficiario"
+        },
+        "rfc": {
+          "type": "string",
+          "example": "XAXE760823XXX",
+          "default": "XAXE760823XXX",
+          "description": "RFC de beneficiario"
+        },
+        "email": {
+          "type": "string",
+          "example": "ijruizm@motudo.com",
+          "default": "ijruizm@motudo.com",
+          "description": "Dirección de correo electrónico de beneficiario"
+        },
+        "account": {
+          "type": "string",
+          "example": "11111",
+          "default": "11111",
+          "description": "Numero de cuneta del beneficiario"
+        },
+        "maximum_amount": {
+          "type": "number",
+          "example": 10000,
+          "default": 10000,
+          "description": "Monto máximo de transferencia al beneficiario"
+        },
+        "token": {
+          "type": "string",
+          "example": "dksdhw872387617hdsbi82g-232-2332231",
+          "default": "dksdhw872387617hdsbi82g-232-2332231",
+          "description": "Por Definir"
+        },
+        "ip": {
+          "type": "string",
+          "example": "10.10.10.13",
+          "default": "10.10.10.13",
+          "description": "Dirección IP del dispositivo desde el cual se está realizando la transacción"
+        },
+        "agent": {
+          "type": "string",
+          "example": "root",
+          "default": "root",
+          "description": "Por Definir"
+        },
+        "tipo_contacto": {
+          "type": "string",
+          "example": "temporal",
+          "default": "temporal",
+          "description": "Tipo de contacto beneficiario"
+        },
+        "origen": {
+          "type": "string",
+          "example": "MB",
+          "default": "MB",
+          "description": "Origen de la transacción “MB” para mismo banco y “OB” para otro banco"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jesus Calderón",
+          "default": "Jesus Calderón",
+          "description": "Nombre de la persona beneficiaria"
+        },
+        "institution_code": {
+          "type": "string",
+          "example": "009873",
+          "default": "009873",
+          "description": "Código de la institución beneficiaria"
+        },
+        "account_type": {
+          "type": "string",
+          "example": "10",
+          "default": "10",
+          "description": "Tipo de la cuenta beneficiaria"
+        },
+        "alias": {
+          "type": "string",
+          "example": "Eli",
+          "description": "alias del beneficiario"
+        }
+      }
+    },
+    "contacto": {
+      "type": "object",
+      "properties": {
+        "contact_id": {
+          "type": "integer",
+          "example": 666,
+          "default": 666
+        },
+        "client_id": {
+          "type": "integer",
+          "example": 666,
+          "default": 666
+        },
+        "person_type": {
+          "type": "string",
+          "example": "F",
+          "description": "F = Fisica, M = Moral"
+        },
+        "curp": {
+          "type": "string",
+          "example": "SABC560626MDFLRN09",
+          "default": "SABC560626MDFLRN09"
+        },
+        "rfc": {
+          "type": "string",
+          "example": "XAXE760823XXX",
+          "default": "XAXE760823XXX"
+        },
+        "email": {
+          "type": "string",
+          "example": "suca@motudo.com",
+          "default": "suca@motudo.com"
+        },
+        "account": {
+          "type": "string",
+          "example": "11111",
+          "default": "11111"
+        },
+        "maximum_amount": {
+          "type": "number",
+          "example": 10000,
+          "default": 10000
+        },
+        "token": {
+          "type": "string",
+          "example": "dksdhw872387617hdsbi82g-232-2332231",
+          "default": "dksdhw872387617hdsbi82g-232-2332231"
+        },
+        "ip": {
+          "type": "string",
+          "example": "10.10.10.10",
+          "default": "10.10.10.10"
+        },
+        "agent": {
+          "type": "string",
+          "example": "root",
+          "default": "root"
+        },
+        "tipo_contacto": {
+          "type": "string",
+          "example": "temporal",
+          "default": "temporal"
+        },
+        "estatus": {
+          "type": "integer",
+          "example": 1,
+          "description": "1 = activo, 2 = inactivo"
+        },
+        "fecha_creacion": {
+          "type": "string",
+          "example": "2019-08-26T15:38:49.007Z",
+          "default": "2019-08-26T15:38:49.007Z"
+        },
+        "fecha_actualizacion": {
+          "type": "string",
+          "example": "2019-08-26T15:43:35.282Z",
+          "default": "2019-08-26T15:43:35.282Z"
+        },
+        "origen": {
+          "type": "string",
+          "example": "MB",
+          "default": "MB",
+          "description": "MB = mismo banco, OB = Otro banco"
+        },
+        "name": {
+          "type": "string",
+          "example": "Juan pablo Garcia perez",
+          "default": "Juan pablo Garcia perez"
+        },
+        "institution_code": {
+          "type": "string",
+          "example": "009873",
+          "default": "009873"
+        },
+        "account_type": {
+          "type": "string",
+          "example": "10",
+          "default": "10"
+        },
+        "alias": {
+          "type": "string",
+          "example": "Eli",
+          "description": "alias del beneficiario"
+        }
+      }
+    },
+    "contacto_id": {
+      "type": "object",
+      "properties": {
+        "contacto_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "200_mensaje_get_venn": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "Operación exitosa"
+        },
+        "resultObject": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contacto"
+          }
+        }
+      }
+    },
+    "200_mensaje": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "Operación exitosa"
+        },
+        "resultObject": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": []
+        }
+      }
+    },
+    "201_mensaje": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "Operación exitosa"
+        },
+        "resultObject": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contacto_id"
+          }
+        }
+      }
+    },
+    "400_mensaje": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "Datos incorrectos"
+        },
+        "resultObject": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": []
+        }
+      }
+    },
+    "404_mensaje": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "No se encontraron resultados"
+        },
+        "resultObject": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": []
+        }
+      }
+    },
+    "500_mensaje": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "Ocurrió un error al procesar datos"
+        },
+        "resultObject": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": []
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apikey": {
+      "name": "tokenHeader",
+      "type": "apiKey",
+      "in": "header"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "generador-reportes",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node ./app.js",
+    "test": "mocha test/ --timeout 2000 --reporter mochawesome"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-http-context": "^1.2.3",
+    "lodash": "^4.17.15",
+    "macaddress": "^0.2.9",
+    "mocha": "^6.1.4",
+    "moment-timezone": "^0.5.26",
+    "morgan": "^1.9.1",
+    "mssql": "^5.1.0",
+    "node-rsa": "^1.0.5",
+    "pg": "^8.2.1",
+    "pg-protocol": "^1.2.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "swagger-ui-express": "^4.0.4",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.2.1",
+    "pdf": "^0.1.0",
+    "pdfmake": "^0.1.65",
+    "json-as-xlsx": "1.2.0",
+    "exceljs": "4.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.0",
+    "mochawesome": "^4.0.1",
+    "supertest": "^4.0.2",
+    "dredd": "^12.0.6",
+    "newman": "^4.5.7"
+  }
+}

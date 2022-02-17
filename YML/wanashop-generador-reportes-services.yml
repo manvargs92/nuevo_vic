@@ -1,0 +1,25 @@
+#################################################################################
+#Objeto:  (BANCO)
+#Funcionalidad: envio spei (BANCO)
+#Sistema: Spei (BANCO) 
+#Fecha de Creación: 03/Julio/2019
+#Autor: Eduardo Natanael Castillo Caballero [encastillo@frd.org.mx]
+#Actualizaciones: 
+#Versión: 1.0
+#################################################################################
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wanashop-generador-reportes-service
+  namespace: general-soporte-de-negocio
+  labels:
+    app: wanashop-generador-reportes
+spec:
+  type: ClusterIP
+  selector:
+    app: wanashop-generador-reportes
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

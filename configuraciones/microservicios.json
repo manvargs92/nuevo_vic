@@ -1,0 +1,26 @@
+{
+    "log" : {
+    "method":"POST",
+    "uri":"http://logs-service.general-soporte-de-negocio.svc.cluster.local:6000/log",
+    "body":{
+        "identificador_usuario":"",
+        "ip":"",
+        "mac":"",
+        "nombre_microservicio":"Reglas",
+        "nombre_app":"",
+        "nombre_api":"Reglas",
+        "status":"",
+        "path":"",
+        "fecha":"",
+        "funciones":[
+            {
+                "nombre":"",
+                "path":"",
+                "status":"",
+                "mensaje":""
+            }
+        ]
+    },
+    "json":true
+    }
+}

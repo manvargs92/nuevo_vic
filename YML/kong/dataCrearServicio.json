@@ -1,0 +1,6 @@
+{
+   "protocol": "http",
+   "host": "10.10.58.75",
+   "port": 80,
+   "path": "/wanashop/generador/reportes/"
+}

@@ -1,0 +1,32 @@
+{
+    "desarrollo": {
+        "config_id": "desarrollo",
+        "database_config_pg": {
+            "host": "HOST_DEV",
+            "database": "BD_DEV",
+            "user": "USR_DEV",
+            "password": "PASS_DEV",
+            "port": 5432
+        }
+    },
+    "pruebas": {
+        "config_id": "pruebas",
+        "database_config_pg": {
+            "host": "HOST_QA",
+            "database": "BD_QA",
+            "user": "USR_QA",
+            "password": "PASS_QA",
+            "port": 5432
+        }
+    },
+    "produccion": {
+        "config_id": "produccion",
+        "database_config_pg": {
+            "host": "HOST_PROD",
+            "database": "BD_PROD",
+            "user": "USR_PROD",
+            "password": "PASS_PROD",
+            "port": 5432
+        }
+    }
+}

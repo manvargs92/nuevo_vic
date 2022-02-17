@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wanashop-generador-reportes-deployment
+  namespace: general-soporte-de-negocio
+  labels:
+    app: wanashop-generador-reportes
+spec:
+  progressDeadlineSeconds: 60
+  minReadySeconds: 30
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wanashop-generador-reportes
+  template:
+    metadata:
+      labels:
+        app: wanashop-generador-reportes
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: nodeInfra
+                operator: In
+                values:
+                - general
+      tolerations:
+      - key: "nodeInfra"
+        operator: "Equal"
+        value: "general"
+        effect: "NoSchedule"
+      containers:
+      - name: wanashop-generador-reportes
+        image: hub.donde.org.mx/wanashop-generador-reportes:1.0.0
+        imagePullPolicy: Always
+        env:
+        - name: NODE_ENV
+          value: "desarrollo"
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:
+            memory: 500Mi
+            cpu: 400m
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/home/node/logs"
+          name: logs-general-storage        
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      imagePullSecrets:
+      - name: storecred
+      volumes:
+        - name: logs-general-storage
+          persistentVolumeClaim:
+            claimName: logs-general-pvc      
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0

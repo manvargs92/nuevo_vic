@@ -1,0 +1,8 @@
+{
+    "name": "acl",
+    "config": {
+        "whitelist": [
+          "FRD-WANASHOP"
+        ]
+    }
+}
