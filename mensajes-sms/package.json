@@ -1,0 +1,19 @@
+{
+  "name": "esf-wanashop-notificacion-sms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsonschema": "^1.2.4"
+  },
+  "devDependencies": {
+    "serverless-plugin-include-dependencies": "^3.2.1",
+    "serverless-pseudo-parameters": "^2.4.0"
+  }
+}

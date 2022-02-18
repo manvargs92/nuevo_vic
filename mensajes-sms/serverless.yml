@@ -1,0 +1,32 @@
+service: esf-wanashop-notificacion-sms
+plugins:
+  - serverless-plugin-include-dependencies
+  - serverless-pseudo-parameters
+
+package:
+  exclude:
+    - node_modules/**
+    
+custom:
+  paquete: esf-wanashop
+  bucket: ${self:custom.paquete}-bucket-${self:provider.stage}
+  
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage,'dev'}
+  environment: ${self:custom.settings}
+  timeout: 60
+  deploymentBucket:
+    name: ${self:custom.bucket}
+  iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - sns:*
+        Resource: '*'
+      
+functions:
+    email:
+      handler: index.notificar
+      name: ${self:service}
+      description: Función para notificar por sms

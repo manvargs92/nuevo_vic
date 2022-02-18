@@ -1,0 +1,18 @@
+{
+    "sms": {
+        "id": "insertar",
+        "type": "object",
+        "required": [
+            "receptor",
+            "mensaje"
+        ],
+        "properties": {
+            "mensaje": {
+                "type": "string"
+            },
+            "receptor": {
+                "type": "string"
+            }
+        }
+    }
+}
